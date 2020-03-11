@@ -1,14 +1,14 @@
 package com.onpositive.gifpresentation.render.swing;
 
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
-import java.awt.Label;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-
-import org.fit.cssbox.swingbox.BrowserPane;
+import javax.swing.JComponent;
+import javax.swing.JEditorPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import com.onpositive.gifpresentation.core.impl.FlowSlideLayout;
 import com.onpositive.gifpresentation.core.model.ICompositeSlideContent;
@@ -27,8 +27,8 @@ public class SwingComponentCreator implements IComponentCreator {
 	protected Font titleFont = new Font("arial", Font.BOLD, 25);
 
 	@Override
-	public Component createComponent(ISlide slide) {
-		Container container = new Container();
+	public JComponent createComponent(ISlide slide) {
+		JPanel container = new JPanel();
 		setupLayout(container, slide);
 		ISlideLayout slideLayout = slide.getLayout();
 		int spacing = -1;
@@ -38,7 +38,7 @@ public class SwingComponentCreator implements IComponentCreator {
 		if (slide instanceof ITitleSlide) {
 			String title = ((ITitleSlide) slide).getTitle();
 			if (title != null) {
-				Label label = new Label(title, Label.CENTER);
+				JLabel label = new JLabel(title, JLabel.CENTER);
 				label.setFont(titleFont);
 				container.add(label);
 			}
@@ -57,11 +57,11 @@ public class SwingComponentCreator implements IComponentCreator {
 		return container;
 	}
 
-	protected Component createComponent(ISlideContent content) {
+	protected JComponent createComponent(ISlideContent content) {
 		if (content instanceof ICompositeSlideContent) {
 			ICompositeSlideContent compositeContent = (ICompositeSlideContent) content;
 			boolean vertical = ((ICompositeSlideContent) content).getOrientation() == Orientation.VERTICAL;
-			Container container = new Container();
+			JPanel container = new JPanel();
 			container.setLayout(new BoxLayout(container, vertical ? BoxLayout.Y_AXIS : BoxLayout.X_AXIS));
 			int count = compositeContent.getContents().size();
 			for (int i = 0; i < count; i++) {
@@ -74,9 +74,9 @@ public class SwingComponentCreator implements IComponentCreator {
 		}
 		if (content instanceof ITextSlideContent) {
 			ITextSlideContent textContent = (ITextSlideContent) content;
-			BrowserPane browserPane = new BrowserPane();
-			browserPane.setText(textContent.getText());
-			return browserPane;
+			JEditorPane editorPane = createHTMLViewer();    
+			editorPane.setText( textContent.getText() );
+			return editorPane;
 		}
 		if (content instanceof IListSlideContent) {
 			IListSlideContent listContent = (IListSlideContent) content;
@@ -85,15 +85,27 @@ public class SwingComponentCreator implements IComponentCreator {
 			builder.append(bulleted ? "<ul>" : "<ol>");
 			builder.append("\n");
 			for (String item : listContent.getListItems()) {
+				builder.append("<li>");
 				builder.append(item);
+				builder.append("</li>");
 				builder.append("\n");
 			}
 			builder.append(bulleted ? "</ul>" : "</ol>");
+			JEditorPane editorPane = createHTMLViewer();    
+			editorPane.setText( builder.toString() );
+			return editorPane;
 		}
 		if (content instanceof ComponentContent) {
 			return ((ComponentContent) content).getComponent();			
 		}
 		return null;
+	}
+
+	protected JEditorPane createHTMLViewer() {
+		JEditorPane editorPane = new JEditorPane();
+		editorPane.setEditable(false);
+		editorPane.setContentType( "text/html" );
+		return editorPane;
 	}
 
 	protected void setupLayout(Container container, ISlide slide) {

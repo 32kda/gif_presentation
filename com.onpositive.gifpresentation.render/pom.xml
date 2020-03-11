@@ -42,11 +42,5 @@
 			<artifactId>animated-gif-lib</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/net.sf.cssbox/swingbox -->
-		<dependency>
-			<groupId>net.sf.cssbox</groupId>
-			<artifactId>swingbox</artifactId>
-			<version>1.1</version>
-		</dependency>
 	</dependencies>
 </project>

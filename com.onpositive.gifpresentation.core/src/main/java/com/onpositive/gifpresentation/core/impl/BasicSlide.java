@@ -1,5 +1,6 @@
 package com.onpositive.gifpresentation.core.impl;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -60,6 +61,16 @@ public class BasicSlide implements ITitleSlide, IContentSlide {
 		
 		public Builder withText(String text) {
 			BasicSlide.this.content = new TextSlideContent(text);
+			return this;
+		}
+		
+		public Builder withImage(String imagePath) {
+			BasicSlide.this.content = new ImageSlideContent(new File(imagePath));
+			return this;
+		}
+		
+		public Builder withImage(File imageFile) {
+			BasicSlide.this.content = new ImageSlideContent(imageFile);
 			return this;
 		}
 		

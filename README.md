@@ -2,9 +2,9 @@
 Java library for generating animated GIF for displaying a simple presentation. 
 Basic renderening implementation is based on simple HTML rendering using _JTextPane_, which has small CSS subset support.
 
-##Sample code
+## Sample code
 
-###Simple presentation with title, text and list
+### Simple presentation with title, text and list
 ```
 ISlide titleSlide = BasicSlide.newBuilder().withTitle("Lorem Ipsum").build();
 		ISlide textSlide = BasicSlide.newBuilder().withTitle("de Finibus Bonorum et Malorum").withText(
@@ -23,7 +23,7 @@ ISlide titleSlide = BasicSlide.newBuilder().withTitle("Lorem Ipsum").build();
 		presentationRenderer.renderPresentation(presentation, 1024, 768, 2000, outputFile);
 ```
 
-###Custom component demo - create presentation with JFreeChart-based chart
+### Custom component demo - create presentation with JFreeChart-based chart
 
 ```
 public void chartTest() {

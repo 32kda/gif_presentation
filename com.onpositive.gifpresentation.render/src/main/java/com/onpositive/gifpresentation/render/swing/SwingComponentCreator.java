@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagLayout;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,9 +12,11 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
@@ -23,9 +26,12 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
+import org.slf4j.LoggerFactory;
+
 import com.onpositive.gifpresentation.core.impl.FlowSlideLayout;
 import com.onpositive.gifpresentation.core.model.ICompositeSlideContent;
 import com.onpositive.gifpresentation.core.model.IContentSlide;
+import com.onpositive.gifpresentation.core.model.IImageSlideContent;
 import com.onpositive.gifpresentation.core.model.IListSlideContent;
 import com.onpositive.gifpresentation.core.model.IListSlideContent.ListType;
 import com.onpositive.gifpresentation.core.model.ISlide;
@@ -43,11 +49,14 @@ public class SwingComponentCreator implements IComponentCreator {
 	
 	private StyleSheet styleSheet;
 
+	public SwingComponentCreator() {
+	}
+
 	public SwingComponentCreator(File styleSheetFile) {
 		try (Reader reader = new BufferedReader(new FileReader(styleSheetFile))) {
 			init(reader);
 		} catch (IOException e) {
-			e.printStackTrace(); // TODO log this
+			LoggerFactory.getLogger(getClass()).error("Error loading css stylesheet", e);
 		}
 	}
 	
@@ -55,7 +64,7 @@ public class SwingComponentCreator implements IComponentCreator {
 		try {
 			init(reader);
 		} catch (IOException e) {
-			e.printStackTrace(); // TODO log this
+			LoggerFactory.getLogger(getClass()).error("Error loading css stylesheet", e);
 		}
 	}
 	
@@ -74,9 +83,6 @@ public class SwingComponentCreator implements IComponentCreator {
 		if (fgColorVal instanceof Color) {
 			foregrund = (Color) fgColorVal;				
 		}		
-	}
-
-	public SwingComponentCreator() {
 	}
 
 	@Override
@@ -135,6 +141,19 @@ public class SwingComponentCreator implements IComponentCreator {
 			editorPane.setText(textContent.getText());
 			styleComponent(editorPane);
 			return editorPane;
+		}
+		if (content instanceof IImageSlideContent) {
+			IImageSlideContent imageSlideContent = (IImageSlideContent) content;
+			try {
+				BufferedImage bufferedImage = ImageIO.read(imageSlideContent.getImageFile());
+				JLabel label = new JLabel(new ImageIcon(bufferedImage));
+				label.setAlignmentX(0.5f);
+				label.setFont(titleFont);
+				styleComponent(label);
+				return label;
+			} catch (IOException e) {
+				LoggerFactory.getLogger(getClass()).error("Error creating image slide", e);
+			}
 		}
 		if (content instanceof IListSlideContent) {
 			IListSlideContent listContent = (IListSlideContent) content;

@@ -6,7 +6,12 @@
   <packaging>jar</packaging>
 
   <name>core</name>
-  <url>http://maven.apache.org</url>
+  <url>http://maven.apache.org</url><parent>
+  	<groupId>com.onpositive.gifpresentation</groupId>
+  	<artifactId>releng</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<relativePath>../releng</relativePath>
+  </parent>
 
   <dependencies>
     <dependency>
@@ -16,10 +21,5 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <parent>
-  	<groupId>com.onpositive.gifpresentation</groupId>
-  	<artifactId>releng</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
-  	<relativePath>../releng</relativePath>
-  </parent>
+  
 </project>

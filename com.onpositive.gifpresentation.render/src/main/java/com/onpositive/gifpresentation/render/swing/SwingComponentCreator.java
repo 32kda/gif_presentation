@@ -188,6 +188,7 @@ public class SwingComponentCreator implements IComponentCreator {
 		if (styleSheet != null) {
 			HTMLEditorKit htmlEditorKit = (HTMLEditorKit) editorPane.getEditorKit();
 			htmlEditorKit.setStyleSheet(styleSheet);
+			editorPane.setEditorKit(htmlEditorKit);
 		}
 		return editorPane;
 	}

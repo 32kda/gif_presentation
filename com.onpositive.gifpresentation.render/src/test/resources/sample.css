@@ -1,0 +1,55 @@
+/*
+
+Tooplate 2118 Chilling Cafe
+
+https://www.tooplate.com/view/2118-chilling-cafe
+
+
+    Background color:       #3a4a58
+    Title color:            #996633
+    Text color:             #666666
+    Text Dark color:        #333333
+    Table Heading color:    #C4CDD6
+    Table Alternate color:  #e5e8ed 
+*/
+
+body {
+  background-color: #3a4a58;
+  color: #eeeeee;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  padding: 15px;
+  margin: 0;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+td {
+  text-align: center;
+  padding: 10px 15px;
+}
+
+th {
+  color: #333333;
+  font-weight: 400;
+  font-size: 1.2rem;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+tr:nth-child(odd) { background-color: #e5e8ed; }
+
+tr.tm-tr-header {
+  background-color: #c4cdd6;
+  height: 50px;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+

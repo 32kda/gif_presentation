@@ -42,7 +42,7 @@ public class AppTest {
 		File outputFile = new File("sample.gif");
 		presentationRenderer.renderPresentation(presentation, 1024, 768, 2000, outputFile);
 
-		assertTrue(outputFile.exists());
+		assertTrue(outputFile.exists()); //TODO poor test, which tests almost nothing
 
 	}
 }

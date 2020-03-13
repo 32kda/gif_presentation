@@ -73,6 +73,11 @@ public class BasicSlide implements ITitleSlide, IContentSlide {
 			return this;
 		}
 		
+		public Builder withContent(ISlideContent content) {
+			BasicSlide.this.content = content;
+			return this;
+		}
+		
 		public Builder withLayout(ISlideLayout layout) {
 			BasicSlide.this.layout = layout;
 			return this;

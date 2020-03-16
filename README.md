@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/32kda/gif_presentation.svg?branch=development)](https://travis-ci.com/32kda/gif_presentation)
+
 # gif_presentation
 Java library for generating animated GIF for displaying a simple presentation. 
 Basic renderening implementation is based on simple HTML rendering using _JTextPane_, which has small CSS subset support.

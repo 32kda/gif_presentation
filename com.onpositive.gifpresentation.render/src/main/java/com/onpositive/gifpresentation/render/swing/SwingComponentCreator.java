@@ -43,7 +43,7 @@ import com.onpositive.gifpresentation.core.model.Orientation;
 
 public class SwingComponentCreator implements IComponentCreator {
 
-	protected Font titleFont = new Font("arial", Font.BOLD, 25);
+	protected Font titleFont = new Font("arial", Font.BOLD, 32);
 	protected Color foregrund = null;
 	protected Color background = null;
 	

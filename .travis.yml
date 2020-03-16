@@ -1,0 +1,7 @@
+language: java
+
+before_script:
+  - cd releng
+
+script: 
+  - mvn clean compile install

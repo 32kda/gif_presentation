@@ -1,13 +1,21 @@
 package com.onpositive.gifpresentation.render;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.awt.Dimension;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.statistics.HistogramDataset;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
+import com.madgag.gif.fmsware.GifDecoder;
 import com.onpositive.gifpresentation.core.impl.BasicPresentation;
 import com.onpositive.gifpresentation.core.impl.BasicSlide;
 import com.onpositive.gifpresentation.core.model.IPresentation;
@@ -20,7 +28,7 @@ import com.onpositive.gifpresentation.render.swing.SwingComponentCreator;
 public class ChartTest {
 
 	@Test
-	public void chartTest() {
+	public void chartTest(@TempDir Path tempDir) throws FileNotFoundException {
 		ISlide titleSlide = BasicSlide.newBuilder().withTitle("Lorem Ipsum").build();
 		ISlide chartSlide = BasicSlide.newBuilder().withTitle("de Finibus Bonorum et Malorum")
 				.withContent(new ComponentContent(new ChartPanel(createChart()))).build();
@@ -28,8 +36,12 @@ public class ChartTest {
 		File cssFile = new File(getClass().getClassLoader().getResource("sample.css").getFile());
 		GifPresentationRenderer presentationRenderer = new GifPresentationRenderer(
 				new SwingSlideRenderer(new SwingComponentCreator(cssFile)));
-		File outputFile = new File("chart.gif");
+		File outputFile = new File(tempDir.toFile(), "chart.gif");
 		presentationRenderer.renderPresentation(presentation, 800, 600, 2000, outputFile);
+		GifDecoder decoder = new GifDecoder();		
+		assertEquals(0, decoder.read(new FileInputStream(outputFile)));
+		assertEquals(2, decoder.getFrameCount());
+		assertEquals(new Dimension(800,600), decoder.getFrameSize());
 	}
 
 	private JFreeChart createChart() {

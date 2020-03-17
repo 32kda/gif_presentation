@@ -43,7 +43,8 @@ import com.onpositive.gifpresentation.core.model.Orientation;
 
 public class SwingComponentCreator implements IComponentCreator {
 
-	protected Font titleFont = new Font("arial", Font.BOLD, 32);
+	protected Font titleFont = new Font("arial", Font.BOLD, 50);
+	protected Font headerFont = new Font("arial", Font.BOLD, 32);
 	protected Color foregrund = null;
 	protected Color background = null;
 	
@@ -101,7 +102,7 @@ public class SwingComponentCreator implements IComponentCreator {
 			if (title != null) {
 				JLabel label = new JLabel(title, JLabel.CENTER);
 				label.setAlignmentX(0.5f);
-				label.setFont(titleFont);
+				label.setFont(hasContent ? headerFont : titleFont);
 				styleComponent(label);
 				container.add(label);
 			}
@@ -148,7 +149,6 @@ public class SwingComponentCreator implements IComponentCreator {
 				BufferedImage bufferedImage = ImageIO.read(imageSlideContent.getImageFile());
 				JLabel label = new JLabel(new ImageIcon(bufferedImage));
 				label.setAlignmentX(0.5f);
-				label.setFont(titleFont);
 				styleComponent(label);
 				return label;
 			} catch (IOException e) {
@@ -227,6 +227,32 @@ public class SwingComponentCreator implements IComponentCreator {
 		if (foregrund != null) {
 			component.setForeground(foregrund);
 		}
+	}
+
+	public Font getTitleFont() {
+		return titleFont;
+	}
+
+	/**
+	 * This font will be used for a title slide - slide with header and no content
+	 * By default it's Arial 50
+	 * @param titleFont
+	 */
+	public void setTitleFont(Font titleFont) {
+		this.titleFont = titleFont;
+	}
+
+	public Font getHeaderFont() {
+		return headerFont;
+	}
+
+	/**
+	 * This font will be used for a slide header text
+	 * By default it's Arial 32
+	 * @param headerFont
+	 */
+	public void setHeaderFont(Font headerFont) {
+		this.headerFont = headerFont;
 	}
 
 }

@@ -25,9 +25,6 @@ ISlide titleSlide = BasicSlide.newBuilder().withTitle("Lorem Ipsum").build();
 		presentationRenderer.renderPresentation(presentation, 1024, 768, 2000, outputFile);
 ```
 
-![Resulting gif](https://user-images.githubusercontent.com/820526/76825677-2a51dd00-684d-11ea-9523-6ef7e0644d27.gif)
-
-
 ### Custom component demo - create presentation with JFreeChart-based chart
 
 ```
@@ -47,3 +44,4 @@ public void chartTest() {
    ...  // Create chart here
   }   
 ```
+![Resulting chart presentation](https://user-images.githubusercontent.com/820526/76825803-73a22c80-684d-11ea-98ab-aacffc49a484.gif)

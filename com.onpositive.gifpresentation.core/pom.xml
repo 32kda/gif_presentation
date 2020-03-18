@@ -7,13 +7,22 @@
 	<packaging>jar</packaging>
 
 	<name>core</name>
-	<url>http://maven.apache.org</url>
 	<parent>
 		<groupId>com.onpositive.gifpresentation</groupId>
 		<artifactId>releng</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../releng</relativePath>
 	</parent>
+	
+	<url>https://github.com/32kda/gif_presentation</url>
+    <inceptionYear>2020</inceptionYear>
+    <licenses>
+        <license>
+            <name>Eclipse Public License</name>
+            <url>https://www.eclipse.org/legal/epl-2.0/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
 	<dependencies>
 		<dependency>

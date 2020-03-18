@@ -1,9 +1,11 @@
 package com.onpositive.gifpresentation.core.impl;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 import com.onpositive.gifpresentation.core.model.IContentSlide;
+import com.onpositive.gifpresentation.core.model.ISlide;
 import com.onpositive.gifpresentation.core.model.ISlideContent;
 import com.onpositive.gifpresentation.core.model.ISlideLayout;
 import com.onpositive.gifpresentation.core.model.ITitleSlide;
@@ -12,7 +14,7 @@ public class BasicSlide implements ITitleSlide, IContentSlide {
 	
 	private String title;
 	private ISlideContent content;
-	private ISlideLayout layout;
+	private ISlideLayout layout = new FlowSlideLayout();
 	
 	private BasicSlide() {
 	}
@@ -62,6 +64,16 @@ public class BasicSlide implements ITitleSlide, IContentSlide {
 			return this;
 		}
 		
+		public Builder withImage(String imagePath) {
+			BasicSlide.this.content = new ImageSlideContent(new File(imagePath));
+			return this;
+		}
+		
+		public Builder withImage(File imageFile) {
+			BasicSlide.this.content = new ImageSlideContent(imageFile);
+			return this;
+		}
+		
 		public Builder withList(String... items) {
 			BasicSlide.this.content = new ListSlideContent(Arrays.asList(items));
 			return this;
@@ -72,11 +84,25 @@ public class BasicSlide implements ITitleSlide, IContentSlide {
 			return this;
 		}
 		
+		public Builder withContent(ISlideContent content) {
+			BasicSlide.this.content = content;
+			return this;
+		}
+		
 		public Builder withLayout(ISlideLayout layout) {
 			BasicSlide.this.layout = layout;
 			return this;
+		}
+
+		public ISlide build() {
+			return BasicSlide.this;
 		}		
 		
+	}
+
+	@Override
+	public String toString() {
+		return "BasicSlide [title=" + title + ", content=" + content + ", layout=" + layout + "]";
 	}
 
 }

@@ -3,6 +3,13 @@ before_script:
 - cd releng
 script:
 - mvn clean compile install
+install: mvn -DskipTests -Dgpg.skip install
+after_success:
+- gpg2 --keyring=$TRAVIS_BUILD_DIR/pubring.gpg --no-default-keyring --import deployment/signingkey.asc
+- gpg2 --allow-secret-key-import --keyring=$TRAVIS_BUILD_DIR/secring.gpg --no-default-keyring
+  --import deployment/signingkey.asc
+- mvn clean deploy --settings deployment/settings.xml -Dgpg.executable=gpg2 -Dgpg.keyname=52FE1701CAB45328E12ED9C9532A7208D590A2D4
+  -Dgpg.passphrase=$PASSPHRASE -Dgpg.publicKeyring=$TRAVIS_BUILD_DIR/pubring.gpg -Dgpg.secretKeyring=$TRAVIS_BUILD_DIR/secring.gpg
 env:
   global:
   - secure: C4p2ZRRLSCfkQcv7rpcRyHJayfk1xyYe0sO2cLsWVgyA0JcQZ9uACS1a8jdILGNMuLr6b2WaO+qexOktr62OpUB9tQh90Bxif9jLekVdwsIFSZivClG3qjdezB1L5pAdcYX20vZSdmiejJqW5SJ8AJcL6zTNJ/+SlsArEshTewxmoaMShUnqYV/9njXaVkQO3KA3eUmcVexQ9hBawAsf/bYLcBKrx4ZIAY7jPzd73l8tFv8d0hnxeJjOmAKRfMmaCz+JfsPIwt0hFi2TrOfnvx72RKTuXIhG1W0D3PBlApUnnSfFrb26pAwR9hPyY5XcPSuDaaKMLBF6tKdtTJFbBNwGMJV7m9Sx+LKrpGjI0The5qBVgqIy61ta0cRg4pqiTkYQMTmwGc20SUMXmJs+uVicyvq9qokAxAeB+M20o6V6U162hjSJyA/fPQZrlchXaHpbZicraA7xxQNT49SehnGzkUba+K7zDrf1kSBuwiPQi/B5DRarFm8a/x9fgUqXHpBk8vxZHfki4ldDQYs25vBsfsknEMenLUz0RAVssWbyVrs8VO2JOYU/cAx1Y9A5AFwWrvE4s1te47iUJyj+V1t5wn32mt0twD0aCCPjrGUXNa5NCzvlv/UNQyCFetz9J0GE3ZFvnrWCpFzWjJsjvZApnGybhSS8oPD3WhnxvTQ=

@@ -1,9 +1,7 @@
 language: java
-before_script:
-- cd releng
 script:
-- mvn clean compile install
-install: mvn -DskipTests -Dgpg.skip install
+- mvn -f releng/pom.xml clean compile install
+install: mvn -f releng/pom.xml -DskipTests -Dgpg.skip install
 after_success:
 - gpg2 --keyring=$TRAVIS_BUILD_DIR/pubring.gpg --no-default-keyring --import deployment/signingkey.asc
 - gpg2 --allow-secret-key-import --keyring=$TRAVIS_BUILD_DIR/secring.gpg --no-default-keyring
@@ -21,4 +19,3 @@ env:
 before_install:
 - openssl aes-256-cbc -K $encrypted_1645300b04d0_key -iv $encrypted_1645300b04d0_iv
   -in deployment/signingkey.asc.enc -out signingkey.asc -d
-- cd releng

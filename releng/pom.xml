@@ -8,7 +8,7 @@
 	<description>Root assembly project for OnPositive GifPresentation
 	</description>
 	<packaging>pom</packaging>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -23,4 +23,30 @@
 		<module>../com.onpositive.gifpresentation.core</module>
 		<module>../com.onpositive.gifpresentation.render</module>
 	</modules>
+	
+	<scm>
+	    <connection>scm:git:https://github.com/32kda/gif_presentation.git</connection>
+	    <url>https://github.com/32kda/gif_presentation</url>
+	    <developerConnection>32kda</developerConnection>
+	</scm>
+	
+	<licenses>
+	    <license>
+	        <name>Eclipse Public License - v 2.0</name>
+	        <url>https://www.eclipse.org/legal/epl-2.0/</url>
+	        <distribution>repo</distribution>
+	    </license>
+	</licenses>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+
+	</distributionManagement>
 </project>

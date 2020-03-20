@@ -1,4 +1,7 @@
 language: java
+branches:
+  only:
+  - master
 script:
 - mvn -f releng/pom.xml clean compile install
 install: mvn -f releng/pom.xml -DskipTests -Dgpg.skip install

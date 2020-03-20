@@ -18,4 +18,4 @@ env:
   - secure: ChKolivCXXP1UZJQJbuujbaWS3t81cIBDG8KdSra6Xe+/oFY2gkQInDaDQCqStQ4cuwXxf/lhQg5h2BfkIru9uEG4GyKxpO/JLcarE6iXL4cZZmHk3BlsUWaYL/hJm1DIAdmZ/OWv9AAuUr83k3ZR9MlSWpPmnfKH5soUIcf8SobYCLkufz4AKUL1P0VYYQfQr8IxdcrTxtbY4/yqJhngiekP120IyXQlOeOS7kqEdzODgIyeiVvSa60uPdxqcHXj2eoO2gPZSndxjcnlPV3e2Qx32Ynr8udqObMwFYRby2VzsOCj43cu6LCyrEwM5PhDGixAt8j6At7QPpo8iO4AL5TBQSID+xBQVn6cLcF5fCbl2HXNt4VN/fR97fUAtpMMvRYRQSrIRw0Bsw7yGK7NtD+JHS5WAw1Nh+FQjbMi7vIH6RnXd5TBA5ewfjxj8mIDyklZJ4Q+VGf7S2cK8GT+MMvcaJ1cQpI5p7h+gO7PNvS2BSPUzItNal14CeEJCvjaBJz7ekGTfnViP5LOA2uWoq3AVvOSL7GFovK0XrUW//0BztExuqi4qnS0AL7+2GRblI2DPO+UtORzG1wsl6Eje2SYj2EYOGfFJ9gUztC8YJw5IlhmvWpmNpG//CdQwh+xYOHEa+/2a/d4dtrHN8HBAdEEqVDeiyDYSSsr6vHqSA=
 before_install:
 - openssl aes-256-cbc -K $encrypted_1645300b04d0_key -iv $encrypted_1645300b04d0_iv
-  -in deployment/signingkey.asc.enc -out signingkey.asc -d
+  -in deployment/signingkey.asc.enc -out deployment/signingkey.asc -d

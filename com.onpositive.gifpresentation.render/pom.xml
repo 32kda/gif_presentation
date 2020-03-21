@@ -7,10 +7,11 @@
 	<packaging>jar</packaging>
 
 	<name>render</name>
+	<description>OnPositive GiPresentation - Swing-based renderer</description>
 	<parent>
 		<groupId>com.onpositive.gifpresentation</groupId>
 		<artifactId>releng</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.1.0</version>
 		<relativePath>../releng</relativePath>
 	</parent>
 	

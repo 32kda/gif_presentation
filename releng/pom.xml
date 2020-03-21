@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.onpositive.gifpresentation</groupId>
 	<artifactId>releng</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<description>Root assembly project for OnPositive GifPresentation
 	</description>
 	<packaging>pom</packaging>
